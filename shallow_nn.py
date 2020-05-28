@@ -1,5 +1,6 @@
 import numpy as np
 from mnist_prepare import parse_data
+from med_5 import import_5_med
 
 
 def sigmoid_activation(neuron_layer):
@@ -12,7 +13,7 @@ def sigmoid_activation(neuron_layer):
        neuron_layer: Layer of neurons to be activated.
 
     Returns:
-        The activated neurons layer.
+        The activated neurons layer.D
 
     """
     return (1.0 / (1.0 + np.exp(-neuron_layer)))
@@ -79,6 +80,7 @@ class ShallowNetwork:
         # neurons values, used for backpropagation computation.
         self.z_values = []
         self.activations = []
+        self.training_error = []
 
     def feedforward_computation(self, input_vector):
         """
@@ -264,7 +266,7 @@ class ShallowNetwork:
             gradient_weights = [gd_w + up_w for gd_w, up_w in zip(
                 gradient_weights, update_grd_weights)]
         # Updates the biases and gradients for the mini-batch.
-        self.weights = [(1-eta*(lbda/n))*weight - (eta / len(batch))
+        self.weights = [(1-eta*(lbda/n)) * weight - (eta / len(batch))
                         * gradient_w
                         for weight, gradient_w in zip(self.weights,
                                                       gradient_weights)]
@@ -294,14 +296,28 @@ class ShallowNetwork:
         """
         # Gets the predicted and expected values.
         test_results = [(np.argmax(self.feedforward_computation(x)),
-                         np.argmax(y))
-                        for (x, y) in test_data]
+                         np.argmax(y)) for (x, y) in test_data]
         # Computes the number of correctly predicted values.
         return sum(int(x == y) for (x, y) in test_results)
 
+    def loo_eval(self, test_input):
+        """
+        Evaluate the accuracy in the context on leave-one-out.
+
+        Args:
+            test_input: Input to be predicted.
+
+        Returns:
+           Wether the input is correctly classified or not.
+
+        """
+        result = (np.argmax(self.feedforward_computation(test_input[0])),
+                  np.argmax(test_input[1]))
+        return (1 if result[0] == result[1] else 0)
+
     def stochastic_gradient_descent(self, dataset, n_epoch,
                                     batch_size, eta, lbda,
-                                    test_data=None):
+                                    test_data=None, loo=None):
         """
         Trains the network using a stochastic gradient descent.
 
@@ -338,6 +354,7 @@ class ShallowNetwork:
             The trained network.
 
         """
+        loo_score = None
         for epoch in range(n_epoch):
             n = len(dataset)
             # Shuffles the dataset to get random batches.
@@ -349,11 +366,21 @@ class ShallowNetwork:
             for batch in mini_batches:
                 # Updates the parameters.
                 self.parameters_update(batch, eta, lbda, n)
-            # Tests the accuracy on the test set.
+            # Tests the accuracy on the test set if test data is provided.
             if test_data:
                 n_test = len(test_data)
                 print("Epoch {0}: {1} / {2}".format(
                     epoch, self.evaluation(test_data), n_test))
+            # Computes the training_error.
+            ce = 0
+            for elt, res in dataset:
+                ce += self.error_cost(self.activations[-1], res)
+            self.training_error.append(ce/len(dataset))
+        # Leave-one-out evaluation.
+        if loo:
+            loo_score = self.loo_eval(loo)
+            print("One pass terminated; score: {}".format(loo_score))
+        return (loo_score)
 
     def predict(self, target):
         """
@@ -364,8 +391,9 @@ class ShallowNetwork:
         """
         return(np.argmax(self.feedforward_computation(target)))
 
-
+"""
 data = parse_data('mnist.pkl', d_set='train')
 t_data = parse_data('mnist.pkl', d_set='test')
 nn = ShallowNetwork([784, 30, 10], )
 nn.stochastic_gradient_descent(data, 30, 10, 0.5, 5.0, t_data)
+"""
