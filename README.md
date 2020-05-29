@@ -126,6 +126,8 @@ For the decision tree and the neural network, and linear regression,
 3000 sequences of cytoplasmic protein and 3000 sequences of periplasmic protein are selected from the datasets previously shuffled to randomize the samples 
 This gives a working dataset of 6000 sequences.
 
+To begin the data analysis, we first did a probability plot to visualise the normality of the data. To normalize the data, we tiedat first a log transformation, a cube root and then a simple scaling. The normalisation showed improvement with the simple scaling, but we could not get perfectly normal distribution. Afterwards, a PCA was done to visualise how close are the two classes.
+
 ### 2.2 Linear regression
 
 #### Principle and algorithm
@@ -187,6 +189,7 @@ The cost function used is the cross-entropy function. This cost-function makes t
 $C = -\frac{1}{n}\sum_{x}[yln_a + (1 - y)ln(1 - a)]$
 
 ## 3. Results and Discussion
+
 ## 4. Conclusion
 ## References
 
