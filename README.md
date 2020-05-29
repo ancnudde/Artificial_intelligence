@@ -166,7 +166,7 @@ In every machine learning algorithm, it’s the function we try to minimize or m
 To achieve this goal, we will minimize the following cost function:
 !(In the training phase, larger C results in the narrow margin and smaller C results in the wider margin.)[img/Capture d’écran_2020-05-29_17-59-18.png]
 The cost function is essentially a measure of how bad our model is doing at achieving the objective. Then we will move on to its gradient which will be used in the training phase to minimize it :
-!(Capture d’écran_2020-05-29_18-18-17.png)[img/Capture d’écran_2020-05-29_18-18-17.png]
+!(The gradient of the cost function)[img/Capture d’écran_2020-05-29_18-18-17.png]
 If you look closely at J(w), to find it’s minimum, we have to:
 - minimize ∣∣w∣∣² which maximizes margin (2/∣∣w∣∣)
 - minimize the following sum of Hinge loss function which minimizes misclassifications
@@ -195,6 +195,7 @@ The cost function used is the cross-entropy function. This cost-function makes t
 
 We can see on the PCA plot (Figure 1) that the distribution of the sequences is different with or without the signal peptide. With the signal peptide the delimitation is clearer between the cytoplasmic and periplasmic protein. The third principal component allows a good separation between the two set of sequences. Without the signal peptide, we still could see the two clouds of points but there is a bigger overlap between both.
 ![PCA](img/PCA.PNG)
+.center[**Fig. 1:** Image caption]
 
 The accuracy of the linear regression on the dataset with peptide signal is 98.12% and the accuracy for the dataset without the signal peptide is lesser, 94.56%.  
 After training and testing the decision tree, we can see that the accuracy, the proportion of correctly predicted sequence, is 97.66%.  
