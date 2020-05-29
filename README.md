@@ -192,6 +192,9 @@ The cost function used is the cross-entropy function. This cost-function makes t
 
 
 ## 3. Results and Discussion
+
+We can see on the PCA plot (Figure 1) that the distribution of the sequences is different with or without the signal peptide. With the signal peptide the delimitation is clearer between the cytoplasmic and periplasmic protein. The third principal component allows a good separation between the two set of sequences. Without the signal peptide, we still could see the two clouds of points but there is a bigger overlap between both.
+![PCA](img/PCA.PNG)
 ## 4. Conclusion
 ## References
 
