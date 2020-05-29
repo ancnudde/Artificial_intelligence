@@ -1,8 +1,8 @@
-# Predicting cellular location using UniRep embedding of protein sequence
+# Predicting cellular location using a UniRep statistical representation of the protein sequence
 
-Buisson-Chavot Guillaume 
-Cnudde Anthony
-Ody Jessica
+Buisson-Chavot Guillaume,
+Cnudde Anthony,
+Ody Jessica,
 Van den Schilden Jan
 
 30-06-2020
