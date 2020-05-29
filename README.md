@@ -8,7 +8,7 @@ geometry:
 - top=25mm
 - left=20mm
 - right=20mm
-- bottom=30mm
+- bottom=25mm
 header-includes:
 - \usepackage{caption}
 - \captionsetup[figure]{labelformat=empty}
