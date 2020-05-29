@@ -175,16 +175,12 @@ The cost function is essentially a measure of how bad our model is doing at achi
 ![pic3](img/pic3.png)
 
 
-The gradient of the cost function
-
 If you look closely at J(w), to find it’s minimum, we have to:
 - minimize ∣∣w∣∣² which maximizes margin (2/∣∣w∣∣)
 - minimize the following sum of Hinge loss function which minimizes misclassifications
 
 ![pic2](img/pic2.png)
 
-
-Hinge loss function 
 
 In order to reach this goal, we use Stochastic Gradient Descent (SGD).As stop criterion, we build a function with a loop which iterate for instance 1000 times and we will stop the loop and thus the training when the current cost hasn’t decreased much as compared to the previous cost.
 
