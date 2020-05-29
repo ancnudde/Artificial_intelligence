@@ -189,7 +189,6 @@ The cost function used is the cross-entropy function. This cost-function makes t
 $C = -\frac{1}{n}\sum_{x}[yln_a + (1 - y)ln(1 - a)]$
 
 ## 3. Results and Discussion
-### 3.1 Data mining and visualisation
 We can see on the PCA plot (Figure 1) that the distribution of the sequences is different with or without the signal peptide.
 With the signal peptide the delimitation is clearer between the cytoplasmic and periplasmic protein. 
 The third principal component allows a good separation between the two set of sequences. 
