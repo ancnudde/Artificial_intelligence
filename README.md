@@ -171,11 +171,10 @@ $$G_{split} = \frac{i}{m}G_{left} + \frac{j}{m}G_{right}$$
 
 ### 2.4 Support Vector Machine (SVM)
 
-#### General principle
+#### Principle
 SVM is a supervised machine learning algorithm used in general for binary classification problems. Given a set of training examples, each marked as belonging to one or the other of two categories, a SVM training algorithm builds a model that assigns new examples to one category or the other, making it a non-probabilistic binary linear classifier. An SVM model is a representation of the examples as points in space, mapped such that the examples of the separate categories are divided by a clear gap that is as wide as possible. New examples are then mapped into that same space and predicted to belong to a category based on the side of the gap on which they fall.
 
 #### Algorithm 
-##### Main idea
 The SVM algorithm is trained by feeding a dataset with labeled examples (xi, yi). For instance, if our set is composed of proteins and our problem is to determine from which cellular compartment they are, then:
 - An example protein xᵢ is defined as an n-dimentional feature vector that can be plotted on n-dimensional space.
 - The feature vector, as its name indicates, contains features of your protein in numerical form
@@ -187,9 +186,7 @@ Using this dataset, the algorithm have to find a hyperplane (or decision boundar
 - the hyperplane equation (w.x + b = 0) yields a value ≥ 1 for proteins from +ve class and ≤ -1 for proteins from -ve class
 The training algorithm has to find the optimal values w and b which define this hyperplane. These optimal values are found by minimizing a cost function. Once the training algorithm has identified these optimal values, the SVM model f(x) is then defined as : f(x) = sign (w*. x + b*)
 
-##### Cost function
-In every machine learning algorithm, it’s the function we try to minimize or maximize to reach our goal. And our objective is to find a hyperplane that separates +ve and -ve proteins with the largest margin while keeping the misclassification as low as possible.
-To achieve this goal, we will minimize the following cost function:
+Our objective is to find a hyperplane that separates +ve and -ve proteins with the largest margin while keeping the misclassification as low as possible. To achieve this goal, we will minimize the following cost function:
 
 ![pic1](img/pic1.png)
 
