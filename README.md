@@ -1,8 +1,8 @@
-# Predicting cellular location using a UniRep statistical representation of the protein sequence
+# Predicting cellular location using UniRep embedding of protein sequence
 
-Buisson-Chavot Guillaume,
-Cnudde Anthony,
-Ody Jessica,
+Buisson-Chavot Guillaume 
+Cnudde Anthony
+Ody Jessica
 Van den Schilden Jan
 
 30-06-2020
@@ -198,15 +198,13 @@ Without the signal peptide, we still could see the two clouds of points but ther
 ![image](img/PCA.PNG)
 **Fig. 1:** PCA plot of the cytoplasmic protein (yellow dots) and periplasmic protein (purples dots) with the peptide signal (left) and without the peptide signal (right).
 
-After training and testing the neural network and the decision tree, we can see that the accuracy, the proportion of correctly predicted sequence, is over 95% for the two methods. The modification of the parameters ꞃ and λ and the batch size does not seem to highly impact the k-fold cross validation as it is always around 99%. The results are slightly better with the batch size to 8 and the ꞃ value around 0.2.
+
+The accuracy of the linear regression on the dataset with peptide signal is 98.12% and the accuracy for the dataset without the signal peptide is lesser, 94.56%.  
+After training and testing the decision tree, we can see that the accuracy, the proportion of correctly predicted sequence, is over 95%. 
+For the Neutral network, the modification of the parameters ꞃ and λ and the batch size does not seem to highly impact the k-fold cross validation as it is always around 99%. After training with the differents parameters, the results are slightly better with the batch size to 8 and the ꞃ value around 0.2.
 When comparing the two algorithms, we could see that the accuracy of the decision tree is 97.66%, which is still below the neural network's one.
 
-### 3.2 Linear regression
-The accuracy of the linear regression on the dataset with peptide signal is 98.12% and the accuracy for the dataset without the signal peptide is lesser, 94.56%.
-### 3.3 Decision tree
-### 3.4 Support Vector Machine (SVM)
-### 3.5 Recurrent Neural Network
-### 3.6 Summary table
+
 
 ## 4. Conclusion
 ## References
