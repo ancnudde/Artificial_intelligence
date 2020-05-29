@@ -198,6 +198,9 @@ Without the signal peptide, we still could see the two clouds of points but ther
 ![image](img/PCA.PNG)
 **Fig. 1:** PCA plot of the cytoplasmic protein (yellow dots) and periplasmic protein (purples dots) with the peptide signal (left) and without the peptide signal (right).
 
+After training and testing the neural network and the decision tree, we can see that the accuracy, the proportion of correctly predicted sequence, is over 95% for the two methods. The modification of the parameters ꞃ and λ and the batch size does not seem to highly impact the k-fold cross validation as it is always around 99%. The results are slightly better with the batch size to 8 and the ꞃ value around 0.2.
+When comparing the two algorithms, we could see that the accuracy of the decision tree is 97.66%, which is still below the neural network's one.
+
 ### 3.2 Linear regression
 ### 3.3 Decision tree
 ### 3.4 Support Vector Machine (SVM)
