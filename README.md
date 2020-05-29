@@ -75,17 +75,56 @@ and recurrent neural network.
 The performance of the different methods was compared.
 
 ## 2. Methods
-### 2.1 Data mining and visualisation
-The dataset of protein for this work is elaborated form the Uniprot platform. The protein sequences are retrieved with UniProt REST API (https://www.uniprot.org/help/api%5Fqueries), a programmatic access that allows to download the sequences through queries. To limit the size of the dataset, we only included proteins of Gammaproteobacteria. 
-First, we asked in the location query to select only the proteins with an annotation of being in the cytoplasm or the cytosol. As an extra safeguard, it was specified that those proteins could not have an annotation of containing a signal peptide which would indicate its destination to be another than the cytoplasm or cytosol. 
-Second, periplasmic protein sequences were selected through a similar method with for the location query the annotation of the protein being in the periplasm. It is also specified in the annotation query that proteins should contain signal peptides.
-As we explain before, signal peptides are used to identify destination of proteins (Benham 2012, Klatt et Zoltan 2012, Peng Chong 2019) but are sometimes insufficient to guarantee the identification of all the proteins that have a certain destination, in this case the periplasm. So, a third file is generated with the location query selecting protein in the periplasm and no signal peptides in the protein sequence.
-To limit the sampling bias, the software CD-HIT align the protein sequences in the selected dataset and calculate the percentage of identity of the sequences and only sequences of at most 50 percent identity were kept.
-Finally, the sequences were transformed to a fixed length vector representation using UniRep. This method extracts states from an unsupervised trained mLSTM-RNN and combines them into a fixed length UniRep representation. This representation contains essential structural and functional features that can be used by ML algorithms to distinguish between Periplasmic and Cytoplasmic proteins.
-For the decision tree and the neural network, 3000 sequences of cytoplasmic protein and 3000 sequences of periplasmic protein are selected from the datasets previously shuffle to randomise the samples, given a working dataset of 6000 sequences.
-For the linear regression analysis, 4000 sequences of each cellular compartments were randomly selected which make a dataset of 8000 sequences. 
 
-To begin the data analysis, we first did a probability plot to visualise the normality of the data. To normalize the data, we tiedat first a log transformation, a cube root and then a simple scaling. The normalisation showed improvement with the simple scaling, butwe could not get perfectly normal distribution. Afterwards, a PCA was done to visualise how close are the two classes.
+### 2.1. Data mining
+
+The protein dataset for this work was generated using the [Uniprot REST API](https://www.uniprot.org/help/api%5Fqueries). 
+The API provides a programmatic access to download the sequences through queries.
+The goal in this work was to make a classifier that can distinguish between cytoplasmic and periplasmic proteins.
+Only Gram-negative Bacteria have a periplasm,
+but this is not one phylogenetic group.
+In this work we limited ourselves to Gammaproteobacteria.
+
+To generate a set of cytoplasmic proteins,
+the query asked for proteins with an annotation of being located in the cytoplasm or cytosol.
+As an extra safeguard,
+it was specified that those proteins could not have an annotation of containing a signal peptide as cytoplasmic proteins normally do not have signal peptides.
+The query is shown below.
+
+```
+QUERY="taxonomy:Gammaproteobacteria 
+(locations:(location:cytoplasm) 
+OR locations:(location:cytosol)) 
+NOT annotation:(type:signal)"
+```
+
+
+To generate the set of periplasmic proteins,
+a similar search was performed.
+This time looking for an annotation of the protein being in the periplasm and the presence of a signal peptide (shown below).
+
+```
+QUERY="taxonomy:Gammaproteobacteria 
+locations:(location:periplasm) 
+annotation:(type:signal)"
+```
+
+As we explain before, signal peptides are used to identify destination of proteins[CITATION Ben12 \l 2060  \m Kla12 \m Pen19], 
+but it has been noted that certain biophysical features are necessary in addition to guarantee its translocation.
+Therefore, a third dataset was generated which was identical to the periplasm dataset, 
+except that the signal peptides were cut off to compare the performance of the different ML methods when trained with and without signal peptide.
+
+To limit sampling bias, 
+the software CD-HIT a calculates the percentage identity between the protein sequences. 
+Sequences with more identity than 50 percent are clustered together and a representative was chosen.
+
+Finally, the sequences were transformed into a fixed length vector representation using UniRep. 
+This method extracts states from an unsupervised trained mLSTM-RNN and combines them into a fixed length UniRep representation. 
+This representation contains essential structural and functional features that can be used by ML algorithms to distinguish between Periplasmic and Cytoplasmic proteins.
+
+For the decision tree and the neural network, and linear regression, 
+3000 sequences of cytoplasmic protein and 3000 sequences of periplasmic protein are selected from the datasets previously shuffled to randomize the samples 
+This gives a working dataset of 6000 sequences.
 
 ### 2.2 Linear regression
 ### 2.3 Decision tree
@@ -97,15 +136,29 @@ A decision tree is a binary tree in which each node corresponds to a subset of t
 The algorithm is simple. For each feature in the dataset, we begin by sorting the values vector of that feature in ascending order. Then, for each possible value in this vector, we split the data in left subset and right subset and compute the score on these subsets. The value giving the subsets with the highest score among all features is selected as split point. This step is repeated for each node, giving birth to the left and right children nodes, and the process is repeated recursively until all the nodes are pure or a certain depth is reached.
 The cost function used here is the GINI purity score. This score tells how pure a node is, i.e. how similar the classes in the node are. A node with only one class in it would then have a GINI score of 1. The GINI score is computed as follows:
 
-$G = \sum_{i=1}^{c}(p_i)^2$
+$$G = \sum_{i=1}^{c}(p_i)^2$$
 
 With c the number of classes in the dataset, and pi the probability for a datapoint of being of class i. 
 This score holds for each subset given by the split. To compute the total score for the split, the GINI score is computed for each subset, and then weighted by the proportion of the data of the parent node that is present in each subset and summed. So, if m is the size of the starting dataset, i the size of the left subset and j the size of the right subset obtained by splitting the starting dataset:
 
-$G_{split} = \frac{i}{m}G_{left} + \frac{j}{m}G_{right}$
+$$G_{split} = \frac{i}{m}G_{left} + \frac{j}{m}G_{right}$$
 
 ### 2.4 Support Vector Machine (SVM)
 ### 2.5 Recurrent neural network
+
+#### Principle
+A neural network is a set of layers composed of nodes called neurons, connected to each other by weighted connections. These layers are of three type: one input layer, in which the input is given, one or more hidden layers, and an output layer, giving the result of the prediction. One more node can be added to each layer: the bias node. The idea behind neural network is to adapt the weights of the connections between the nodes, as well as the biases, to get an accurate prediction.
+To assess the accuracy of the network, we need to use k-fold cross validation. In k-fold cross validation, the dataset is divided in k folds, and one fold is used as testing set while the others are used to train the classifier. Once this step is done, the process is repeated using another fold as testing set and reimplementing the previous one in training process, and so on until all folds have been use.
+
+#### Algorithm
+To goal of the algorithm is to find a good set of weights and biases to get an accurate prediction. The principal tool used to achieve this goal is called backpropagation. Backpropagation is an algorithm using the error on the output layer to retro-compute the errors generated by the weights and biases to adapt them step by step. The first step in a neural network is the feedforward step, where we will compute the output given the current parameters. To do so, we first initialize the weights at random. Then, each node is computed as the combination of each node of the previous layer, weighted by the given weight connecting this node to the corresponding node of that previous layer. Then, the computed node is 'activated' by a so-called activation function that maintains it in a certain range (for example, between 0 and 1 with a sigmoid activation function). This process is repeated until the output node, where the obtained values gives the output.
+The problem then becomes an optimisation problem: we define a cost function, reflecting the error in the output layer, and we will try to minimize it. This is done by finding an area where the derivative of this function is close to 0, meaning the cost function does not evolve anymore (at least in this area as this could be a local minimum). This is where backpropagation comes into play. By chain rule, we can compute the error on the layer  thanks to the error on the layer , i.e., we can get the error on each layer given the error on the output. With this process, we will adapt the weights by passing the inputs of the training set through the network one by one.
+The activation function used here is the classical sigmoid activation. It is given by the following formula:
+
+This function is classically used in neural networks. It keeps value in a range between 0 and 1. This allows to add non-linearity in the network, allowing to perform non-linear mappings. 
+The cost function used is the cross-entropy function. This cost-function makes training easier compared to a simple MSE score because it avoids slow-down in learning by not having a partial derivative dependant of the activated derivative that can be close to 0 due to the nature of sigmoid activation. The cross-entropy function is computed as follows:
+
+
 ## 3. Results and Discussion
 ## 4. Conclusion
 ## References
