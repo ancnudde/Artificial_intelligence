@@ -189,7 +189,12 @@ The cost function used is the cross-entropy function. This cost-function makes t
 $C = -\frac{1}{n}\sum_{x}[yln_a + (1 - y)ln(1 - a)]$
 
 ## 3. Results and Discussion
+### 3.1 Data mining and visualisation
 ![image](PCA.PNG)
+### 3.2 Linear regression
+### 3.3 Decision tree
+### 3.4 Support Vector Machine (SVM)
+### 3.5 Recurrent Neural Network
 ## 4. Conclusion
 ## References
 
