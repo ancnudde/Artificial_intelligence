@@ -166,7 +166,7 @@ In every machine learning algorithm, it’s the function we try to minimize or m
 To achieve this goal, we will minimize the following cost function:
 !(In the training phase, larger C results in the narrow margin and smaller C results in the wider margin.)[img/Capture d’écran_2020-05-29_17-59-18.png]
 The cost function is essentially a measure of how bad our model is doing at achieving the objective. Then we will move on to its gradient which will be used in the training phase to minimize it :
-!(The gradient of the cost function)[img/Capture d’écran_2020-05-29_18-18-17.png]
+!(Capture d’écran_2020-05-29_18-18-17.png)[img/Capture d’écran_2020-05-29_18-18-17.png]
 If you look closely at J(w), to find it’s minimum, we have to:
 - minimize ∣∣w∣∣² which maximizes margin (2/∣∣w∣∣)
 - minimize the following sum of Hinge loss function which minimizes misclassifications
