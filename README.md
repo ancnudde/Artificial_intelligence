@@ -202,6 +202,7 @@ After training and testing the neural network and the decision tree, we can see 
 When comparing the two algorithms, we could see that the accuracy of the decision tree is 97.66%, which is still below the neural network's one.
 
 ### 3.2 Linear regression
+The accuracy of the linear regression on the dataset with peptide signal is 98.12% and the accuracy for the dataset without the signal peptide is lesser, 94.56%.
 ### 3.3 Decision tree
 ### 3.4 Support Vector Machine (SVM)
 ### 3.5 Recurrent Neural Network
