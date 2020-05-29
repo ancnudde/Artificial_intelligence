@@ -205,6 +205,7 @@ When comparing the two algorithms, we could see that the accuracy of the decisio
 ### 3.3 Decision tree
 ### 3.4 Support Vector Machine (SVM)
 ### 3.5 Recurrent Neural Network
+### 3.6 Summary table
 
 ## 4. Conclusion
 ## References
