@@ -4,9 +4,6 @@ date: 29-06-2020
 author: Buisson-Chavot Guillaume, Cnudde Anthony, Ody Jessica, Van den Schilden Jan
 classoption:
 - twocolumn
-header-includes:
-- \usepackage{caption}
-- \captionsetup[figure]{labelformat=empty}
 ---
 
 
@@ -165,12 +162,12 @@ A decision tree is a binary tree in which each node corresponds to a subset of t
 The algorithm is simple. For each feature in the dataset, we begin by sorting the values vector of that feature in ascending order. Then, for each possible value in this vector, we split the data in left subset and right subset and compute the score on these subsets. The value giving the subsets with the highest score among all features is selected as split point. This step is repeated for each node, giving birth to the left and right children nodes, and the process is repeated recursively until all the nodes are pure or a certain depth is reached.
 The cost function used here is the GINI purity score. This score tells how pure a node is, i.e. how similar the classes in the node are. A node with only one class in it would then have a GINI score of 1. The GINI score is computed as follows:
 
-$$G = \sum_{i=1}^{c}(p_i)^2$$
+$G = \sum_{i=1}^{c}(p_i)^2$
 
 With c the number of classes in the dataset, and pi the probability for a datapoint of being of class i. 
 This score holds for each subset given by the split. To compute the total score for the split, the GINI score is computed for each subset, and then weighted by the proportion of the data of the parent node that is present in each subset and summed. So, if m is the size of the starting dataset, i the size of the left subset and j the size of the right subset obtained by splitting the starting dataset:
 
-$$G_{split} = \frac{i}{m}G_{left} + \frac{j}{m}G_{right}$$
+$G_{split} = \frac{i}{m}G_{left} + \frac{j}{m}G_{right}$
 
 ### 2.4 Support Vector Machine (SVM)
 
@@ -197,14 +194,14 @@ In the training phase, larger C results in the narrow margin and smaller C resul
 
 The cost function is essentially a measure of how bad our model is doing at achieving the objective. Then we will move on to its gradient which will be used in the training phase to minimize it :
 
-![](img/pic3.png)
+![pic3](img/pic3.png)
 
 
 If you look closely at J(w), to find it’s minimum, we have to:
 - minimize ∣∣w∣∣² which maximizes margin (2/∣∣w∣∣)
 - minimize the following sum of Hinge loss function which minimizes misclassifications
 
-$$max(0,1-y_i * (w.x_i+b))$$
+$max(0,1-y_i * (w.x_i+b))$
 
 In order to reach this goal, we use Stochastic Gradient Descent (SGD).As stop criterion, we build a function with a loop which iterate for instance 1000 times and we will stop the loop and thus the training when the current cost hasn’t decreased much as compared to the previous cost.
 
@@ -221,12 +218,12 @@ To goal of the algorithm is to find a good set of weights and biases to get an a
 The problem then becomes an optimisation problem: we define a cost function, reflecting the error in the output layer, and we will try to minimize it. This is done by finding an area where the derivative of this function is close to 0, meaning the cost function does not evolve anymore (at least in this area as this could be a local minimum). This is where backpropagation comes into play. By chain rule, we can compute the error on the layer  thanks to the error on the layer , i.e., we can get the error on each layer given the error on the output. With this process, we will adapt the weights by passing the inputs of the training set through the network one by one.
 The activation function used here is the classical sigmoid activation. It is given by the following formula:
 
-$$\sigma = \frac{1}{1 + e^x}$$
+$\sigma = \frac{1}{1 + e^x}$
 
 This function is classically used in neural networks. It keeps value in a range between 0 and 1. This also allows to add non-linearity in the network, allowing to perform non-linear mappings. 
 The cost function used is the cross-entropy function. This cost-function makes training easier compared to a simple MSE score because it avoids slow-down in learning by not having a partial derivative dependant of the activated derivative that can be close to 0 due to the nature of sigmoid activation. The cross-entropy function is computed as follows:
 
-$$C = -\frac{1}{n}\sum_{x}[yln_a + (1 - y)ln(1 - a)]$$
+$C = -\frac{1}{n}\sum_{x}[yln_a + (1 - y)ln(1 - a)]$
 
 ## 3. Results and Discussion
 
