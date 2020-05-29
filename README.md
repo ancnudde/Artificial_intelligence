@@ -4,6 +4,9 @@ date: 29-06-2020
 author: Buisson-Chavot Guillaume, Cnudde Anthony, Ody Jessica, Van den Schilden Jan
 classoption:
 - twocolumn
+header-includes:
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
 ---
 
 
@@ -194,7 +197,7 @@ In the training phase, larger C results in the narrow margin and smaller C resul
 
 The cost function is essentially a measure of how bad our model is doing at achieving the objective. Then we will move on to its gradient which will be used in the training phase to minimize it :
 
-![pic3](img/pic3.png)
+![](img/pic3.png)
 
 
 If you look closely at J(w), to find it’s minimum, we have to:
