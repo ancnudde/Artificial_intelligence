@@ -199,9 +199,9 @@ The cost function used is the cross-entropy function. This cost-function makes t
 
 ## 3. Results and Discussion
 
-We can see on the PCA plot (Figure 1) that the distribution of the sequences is different with or without the signal peptide. With the signal peptide the delimitation is clearer between the cytoplasmic and periplasmic protein. The third principal component allows a good separation between the two set of sequences. Without the signal peptide, we still could see the two clouds of points but there is a bigger overlap between both.
+We can see on the PCA plot (Fig. 1) that the distribution of the sequences is different with or without the signal peptide. With the signal peptide the delimitation is clearer between the cytoplasmic and periplasmic protein. The third principal component allows a good separation between the two set of sequences. Without the signal peptide, we still could see the two clouds of points but there is a bigger overlap between both.
 ![PCA](img/PCA.PNG)
-.center[**Fig. 1:** Image caption]
+**Fig. 1:** PCA plot of the cytoplasmic protein (yellow dots) and periplasmic protein (purples dots) with the peptide signal (left) and without the peptide signal (right).
 
 The accuracy of the linear regression on the dataset with peptide signal is 98.12% and the accuracy for the dataset without the signal peptide is lesser, 94.56%.  
 After training and testing the decision tree, we can see that the accuracy, the proportion of correctly predicted sequence, is 97.66%.  
