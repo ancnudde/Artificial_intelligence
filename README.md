@@ -194,13 +194,8 @@ With the signal peptide the delimitation is clearer between the cytoplasmic and 
 The third principal component allows a good separation between the two set of sequences. 
 Without the signal peptide, we still could see the two clouds of points but there is a bigger overlap between both.
 
-.center[
 ![image](img/PCA.PNG)
-.caption[
 **Fig. 1:** PCA plot of the cytoplasmic protein (yellow dots) and periplasmic protein (purples dots) with the peptide signal (left) and without the peptide signal (right).
-]
-
-]
 
 ## 4. Conclusion
 ## References
