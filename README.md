@@ -157,7 +157,7 @@ The activation function used here is the classical sigmoid activation. It is giv
 
 $\sigma = \frac{1}{1 + e^x}$
 
-This function is classically used in neural networks. It keeps value in a range between 0 and 1. This allows to add non-linearity in the network, allowing to perform non-linear mappings. 
+This function is classically used in neural networks. It keeps value in a range between 0 and 1. This also allows to add non-linearity in the network, allowing to perform non-linear mappings. 
 The cost function used is the cross-entropy function. This cost-function makes training easier compared to a simple MSE score because it avoids slow-down in learning by not having a partial derivative dependant of the activated derivative that can be close to 0 due to the nature of sigmoid activation. The cross-entropy function is computed as follows:
 
 $C = -\frac{1}{n}\sum_{x}[yln_a + (1 - y)ln(1 - a)]$
