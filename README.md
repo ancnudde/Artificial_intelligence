@@ -1,11 +1,11 @@
 # Predicting cellular location using UniRep embedding of protein sequence
 
-Buisson-Chavot Guillaume 
-Cnudde Anthony
-Ody Jessica
+Buisson-Chavot Guillaume, 
+Cnudde Anthony,
+Ody Jessica,
 Van den Schilden Jan
 
-30-06-2020
+29-06-2020
 
 ## 1. Introduction
 
@@ -126,33 +126,7 @@ For the decision tree and the neural network, and linear regression,
 3000 sequences of cytoplasmic protein and 3000 sequences of periplasmic protein are selected from the datasets previously shuffled to randomize the samples 
 This gives a working dataset of 6000 sequences.
 
-To begin the data analysis, we first did a probability plot to visualise the normality of the data. To normalize the data, we tiedat first a log transformation, a cube root and then a simple scaling. The normalisation showed improvement with the simple scaling, but we could not get perfectly normal distribution. Afterwards, a PCA was done to visualise how close are the two classes.
-
 ### 2.2 Linear regression
-
-#### Principle and algorithm
-
-In a multiple linear regression model the value to predict (dependent variable, column vector Y)
-depends on one or multiple independent variables (matrix X) in a linear way.
-Each independent variable has its own weight (column vector B).
-
-Y = XB
-
-Optimizing the model is choosing the weights in the Column vector B so that observations Y' deviate as little as possible from the predicted values Y.
-To give a quantification to "as little as possible",
-the mean square error cost function was used.
-
-MSE = SUM((Y-Y')^2)/N
-
-While this gives an indication of how good a certain set of weights is,
-it doesn't tell in which directions these weights should be modified to get better weights.
-To get this direction,
-the partial derivative is of the cost function is taken in each of the direction.
-To not "jump" to far, this new direction is multiplied by a fraction.
-This method is also called gradient descent.
-
-B_n+1 = B_n - gamma * Delta(MSE(B_n))
-
 ### 2.3 Decision tree
 
 #### Principle
@@ -170,6 +144,42 @@ This score holds for each subset given by the split. To compute the total score 
 $$G_{split} = \frac{i}{m}G_{left} + \frac{j}{m}G_{right}$$
 
 ### 2.4 Support Vector Machine (SVM)
+
+#### General principle
+SVM is a supervised machine learning algorithm used in general for binary classification problems. Given a set of training examples, each marked as belonging to one or the other of two categories, a SVM training algorithm builds a model that assigns new examples to one category or the other, making it a non-probabilistic binary linear classifier. An SVM model is a representation of the examples as points in space, mapped such that the examples of the separate categories are divided by a clear gap that is as wide as possible. New examples are then mapped into that same space and predicted to belong to a category based on the side of the gap on which they fall.
+
+#### Algorithm 
+##### Main idea
+The SVM algorithm is trained by feeding a dataset with labeled examples (xi, yi). For instance, if our set is composed of proteins and our problem is to determine from which cellular compartment they are, then:
+- An example protein xᵢ is defined as an n-dimentional feature vector that can be plotted on n-dimensional space.
+- The feature vector, as its name indicates, contains features of your protein in numerical form
+- Each feature vector is labeled with a class yi depending on the compartment.
+- The class yᵢ can either be a +ve or -ve (for instance, periplasm protein = 1, cytoplasm protein = -1)
+
+Using this dataset, the algorithm have to find a hyperplane (or decision boundary) whose properties are as follows:
+- It creates a separation between proteins of  the two classes with a maximum margin
+- the hyperplane equation (w.x + b = 0) yields a value ≥ 1 for proteins from +ve class and ≤ -1 for proteins from -ve class
+The training algorithm has to find the optimal values w and b which define this hyperplane. These optimal values are found by minimizing a cost function. Once the training algorithm has identified these optimal values, the SVM model f(x) is then defined as : f(x) = sign (w*. x + b*)
+
+##### Cost function
+In every machine learning algorithm, it’s the function we try to minimize or maximize to reach our goal. And our objective is to find a hyperplane that separates +ve and -ve proteins with the largest margin while keeping the misclassification as low as possible.
+To achieve this goal, we will minimize the following cost function:
+
+![In the training phase, larger C results in the narrow margin and smaller C results in the wider margin.]("img/Capture d’écran_2020-05-29_17-59-18.png")
+
+The cost function is essentially a measure of how bad our model is doing at achieving the objective. Then we will move on to its gradient which will be used in the training phase to minimize it :
+
+![The gradient of the cost function](img/Capture d’écran_2020-05-29_18-18-17.png)
+
+If you look closely at J(w), to find it’s minimum, we have to:
+- minimize ∣∣w∣∣² which maximizes margin (2/∣∣w∣∣)
+- minimize the following sum of Hinge loss function which minimizes misclassifications
+
+![Hinge loss function](img/Capture d’écran_2020-05-29_18-15-40.png)
+
+In order to reach this goal, we use Stochastic Gradient Descent (SGD).As stop criterion, we build a function with a loop which iterate for instance 1000 times and we will stop the loop and thus the training when the current cost hasn’t decreased much as compared to the previous cost.
+
+Note : SVM algorithms can efficiently perform a non-linear classification using what is called the kernel trick, implicitly mapping their inputs into high-dimensional feature spaces.
 
 ### 2.5 Recurrent neural network
 
@@ -190,21 +200,15 @@ The cost function used is the cross-entropy function. This cost-function makes t
 $$C = -\frac{1}{n}\sum_{x}[yln_a + (1 - y)ln(1 - a)]$$
 
 ## 3. Results and Discussion
-We can see on the PCA plot (Figure 1) that the distribution of the sequences is different with or without the signal peptide.
-With the signal peptide the delimitation is clearer between the cytoplasmic and periplasmic protein. 
-The third principal component allows a good separation between the two set of sequences. 
-Without the signal peptide, we still could see the two clouds of points but there is a bigger overlap between both.
 
-![image](img/PCA.PNG)
+We can see on the PCA plot (Fig. 1) that the distribution of the sequences is different with or without the signal peptide. With the signal peptide the delimitation is clearer between the cytoplasmic and periplasmic protein. The third principal component allows a good separation between the two set of sequences. Without the signal peptide, we still could see the two clouds of points but there is a bigger overlap between both.
+![PCA](img/PCA.PNG)
 **Fig. 1:** PCA plot of the cytoplasmic protein (yellow dots) and periplasmic protein (purples dots) with the peptide signal (left) and without the peptide signal (right).
-
 
 The accuracy of the linear regression on the dataset with peptide signal is 98.12% and the accuracy for the dataset without the signal peptide is lesser, 94.56%.  
 After training and testing the decision tree, we can see that the accuracy, the proportion of correctly predicted sequence, is over 95%. 
 For the Neutral network, the modification of the parameters $\eta$ and $\lambda$ and the batch size does not seem to highly impact the k-fold cross validation as it is always around 99%. After training with the differents parameters, the results are slightly better with the batch size to 8 and the $\lambda$ value around 0.2.
 When comparing the two algorithms, we could see that the accuracy of the decision tree is 97.66%, which is still below the neural network's one.
-
-
 
 ## 4. Conclusion
 
