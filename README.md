@@ -23,15 +23,15 @@ header-includes:
 Protein synthesis (Miller 2001) and subsequent subcellular localization involves complex mechanisms frequently studied over the years .
 Many of these synthesized proteins are excreted into the extracellular environment (Benham 2012).
 Such extracellular proteins allow cells to interact with the outside world or other cells.
-Without, multicellular organisms would be unable intercellular interactions to form tissues and body parts (Yoshitaka Shirasaki 2014).
+Without, multicellular organisms would be unable to form intercellular interaction, tissues or body parts (Yoshitaka Shirasaki 2014).
 But also in bacterial cells there can be up to a third non-cytoplasmic proteins (Orfanoudaki 2017).
-There is a lot of interest on how to distinguish secreted from cytoplasmic proteins,
+It is of great interest to know how to distinguish secreted proteins from cytoplasmic ones,
 especially for those expressing recombinant proteins.
-This is often seen in the medical sector or for the industrial production protein (Peng Chong 2019).
+Recombinant proteins are a tool frequently used in the medical sector or for industrial protein production (Peng Chong 2019).
 
 <!--Part about Signal peptides-->
 Signal peptides are short peptide sequences between 15 and 30 residues at the N-terminal end of the protein that are recognized by cell pathways to excrete the protein (Benham 2012, Klatt 2012).
-During transit, the signal peptide is cleaved off the protein (Peng Chong 2019).
+During transit, the signal peptide is cleaved off the rest of the protein (Peng Chong 2019).
 Even though signal peptides display low evolutionary sequential similarity,
 the underlying biophysical properties display an high degree of conservation (Orfanoudaki 2017).
 It consists of three regions: a positively charged region, a hydrophobic region, and a region with the cleavage site (Klatt 2012, Peng Chong 2019).
@@ -45,7 +45,7 @@ such as secondary structure propensity,
 dynamics,
 and amino acid composition,
 play an important role in determining protein location.
-Predictors that use these features have been reported with an success rate of 95.5% success (Loos 2019).
+Predictors that use these features have been reported with a success rate of 95.5% (Loos 2019).
 
 <!-- Limitations of features -->
 One limitation of including features is that the accuracy of the methods depends on how much information each feature can provide.
@@ -53,21 +53,22 @@ There might also be very important hidden features we don't know about,
 but necessary for optimal performance.
 On the other hand,
 some features could be very descriptive but experimentally expensive to obtain.
-Protein sequence information has become very cheap in the last years however.
+Protein sequencing on the other hand has become very cheap in the last years,
+and protein sequence information is abundant.
 As on the moment of writing, 
-the public database UniProt (Morgat 2019) contained  181,252,700 sequences.
-However, only 562,253 (0.32 %) contained manual annotation of features with experimental evidence.
-Frequently when producing ML-based predictors,
-these are based on well defined features and as a result discard more than 99% of the available sequences.
-However just the knowledge that the sequence is from and extant protein is already useful information.
+the public database UniProt (Morgat 2019) contained  181,252,700 protein sequences.
+However, only 562,253 (0.32 %) contained manual annotations of features with experimental evidence.
+Often ML-based predictors,
+are trained on well defined features and as a result discard more than 99% of the available sequences.
+However just the knowledge that the sequence exists and is from and extant protein is already useful information.
 
 <!-- UniRep representation --> 
-A research group (Alley 2019) took inspiration from state-of-art natural language processing method.
-This method trains a mLSTM RNN a next character prediction problem,
-and uses the hidden states to form a rich representation of the text.
+A research group (Alley 2019) took inspiration from a state-of-art natural language processing method,
+which trains a mLSTM RNN on a next character prediction problem.
+Subsequently the hidden states are used to form a rich representation of the text.
 Similarly, Alley et al. trained a mLSTM RNN on next residue prediction of the protein sequences.
 To achieve this goal, 
-the neural network will encode its own features in the hidden nodes to achieve his goal.
+the neural network will encode its own features in the hidden nodes to predict the next residue.
 A trained network can subsequently be used to generate a fixed length vector in which important protein features are encoded.
 They have shown that such vector can significantly improve the performance of ML based predictors as opposed to using raw sequence information.
 
@@ -120,7 +121,7 @@ annotation:(type:signal)"
 ```
 
 As we explain before, signal peptides are used to identify destination of proteins, 
-but it has been noted that certain biophysical features are necessary in addition to guarantee its translocation.
+but it has been noted that certain biophysical features are necessary in addition to guarantee their translocation.
 Therefore, a third dataset was generated which was identical to the periplasm dataset, 
 except that the signal peptides were cut off to compare the performance of the different ML methods when trained with and without signal peptide.
 
@@ -144,13 +145,13 @@ In a multiple linear regression model the value to predict (dependent variable, 
 depends on one or multiple independent variables (matrix X) in a linear way.
 Each independent variable has its own weight (column vector B).
 
-Y = XB
+$$ Y = XB $$
 
 Optimizing the model is choosing the weights in the Column vector B so that observations Y' deviate as little as possible from the predicted values Y.
 To give a quantification to "as little as possible",
 the mean square error cost function was used.
 
-MSE = SUM((Y-Y')^2)/N
+$$ MSE = \frac{1}{N} \sum(Y-Y')^2$$ 
 
 While this gives an indication of how good a certain set of weights is,
 it doesn't tell in which directions these weights should be modified to get better weights.
@@ -159,7 +160,7 @@ the partial derivative is of the cost function is taken in each of the direction
 To not "jump" to far, this new direction is multiplied by a fraction.
 This method is also called gradient descent.
 
-B_n+1 = B_n - gamma * Delta(MSE(B_n))
+$$B_{n+1} = B_n - \gamma * \Delta MSE(B_n)$$
 
 ### 2.3 Decision tree
 
