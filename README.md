@@ -128,6 +128,25 @@ This gives a working dataset of 6000 sequences.
 
 ### 2.2 Linear regression
 ### 2.3 Decision tree
+
+#### Principle
+A decision tree is a binary tree in which each node corresponds to a subset of the data in the parent node. The splits used to create the child nodes are found by minimizing a cost function which represents how 'pure' are the nodes, i.e. how mixed are the classes of the data in the node. This cost function is computed on each split of each feature in the training set. The data subset in the node is then distributed between the two children nodes according to the fact that the value at the chosen feature is lower or higher than the value chosen for the split. The objective is to obtain nodes that are as pure as possible, hopefully with only one class in it. Once the tree is trained, the prediction is simply done by travelling from node to node according to the split defined in the current one.
+
+#### Algorithm
+The algorithm is simple. For each feature in the dataset, we begin by sorting the values vector of that feature in ascending order. Then, for each possible value in this vector, we split the data in left subset and right subset and compute the score on these subsets. The value giving the subsets with the highest score among all features is selected as split point. This step is repeated for each node, giving birth to the left and right children nodes, and the process is repeated recursively until all the nodes are pure or a certain depth is reached.
+The cost function used here is the GINI purity score. This score tells how pure a node is, i.e. how similar the classes in the node are. A node with only one class in it would then have a GINI score of 1. The GINI score is computed as follows:
+
+\begin{align*}
+G = \sum_{i=1}^{c}(p_i)^2
+\end{align*}
+
+With c the number of classes in the dataset, and pi the probability for a datapoint of being of class i. 
+This score holds for each subset given by the split. To compute the total score for the split, the GINI score is computed for each subset, and then weighted by the proportion of the data of the parent node that is present in each subset and summed. So, if m is the size of the starting dataset, i the size of the left subset and j the size of the right subset obtained by splitting the starting dataset:
+
+\begin{align*}
+G_{split} = \frac{i}{m}G_{left} + \frac{j}{m}G_{right}
+\end{align*}
+
 ### 2.4 Support Vector Machine (SVM)
 ### 2.5 Recurrent neural network
 ## 3. Results and Discussion
