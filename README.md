@@ -136,12 +136,12 @@ A decision tree is a binary tree in which each node corresponds to a subset of t
 The algorithm is simple. For each feature in the dataset, we begin by sorting the values vector of that feature in ascending order. Then, for each possible value in this vector, we split the data in left subset and right subset and compute the score on these subsets. The value giving the subsets with the highest score among all features is selected as split point. This step is repeated for each node, giving birth to the left and right children nodes, and the process is repeated recursively until all the nodes are pure or a certain depth is reached.
 The cost function used here is the GINI purity score. This score tells how pure a node is, i.e. how similar the classes in the node are. A node with only one class in it would then have a GINI score of 1. The GINI score is computed as follows:
 
-$$G = \sum_{i=1}^{c}(p_i)^2$$
+`$G = \sum_{i=1}^{c}(p_i)^2$`
 
 With c the number of classes in the dataset, and pi the probability for a datapoint of being of class i. 
 This score holds for each subset given by the split. To compute the total score for the split, the GINI score is computed for each subset, and then weighted by the proportion of the data of the parent node that is present in each subset and summed. So, if m is the size of the starting dataset, i the size of the left subset and j the size of the right subset obtained by splitting the starting dataset:
 
-$$G_{split} = \frac{i}{m}G_{left} + \frac{j}{m}G_{right}$$
+`$G_{split} = \frac{i}{m}G_{left} + \frac{j}{m}G_{right}$`
 
 ### 2.4 Support Vector Machine (SVM)
 ### 2.5 Recurrent neural network
