@@ -218,7 +218,7 @@ In order to reach this goal, we use Stochastic Gradient Descent (SGD).As stop cr
 
 Note : SVM algorithms can efficiently perform a non-linear classification using what is called the kernel trick, implicitly mapping their inputs into high-dimensional feature spaces.
 
-### 2.5 Recurrent neural network
+### 2.5 Neural network
 
 #### Principle
 A neural network is a set of layers composed of nodes called neurons, connected to each other by weighted connections. These layers are of three type: one input layer, in which the input is given, one or more hidden layers, and an output layer, giving the result of the prediction. One more node can be added to each layer: the bias node. The idea behind neural network is to adapt the weights of the connections between the nodes, as well as the biases, to get an accurate prediction.
