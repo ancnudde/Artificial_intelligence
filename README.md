@@ -165,7 +165,7 @@ The training algorithm has to find the optimal values w and b which define this 
 In every machine learning algorithm, it’s the function we try to minimize or maximize to reach our goal. And our objective is to find a hyperplane that separates +ve and -ve proteins with the largest margin while keeping the misclassification as low as possible.
 To achieve this goal, we will minimize the following cost function:
 
-![In the training phase, larger C results in the narrow margin and smaller C results in the wider margin.](img/Capture d’écran_2020-05-29_17-59-18.png)
+![In the training phase, larger C results in the narrow margin and smaller C results in the wider margin.]("img/Capture d’écran_2020-05-29_17-59-18.png")
 
 The cost function is essentially a measure of how bad our model is doing at achieving the objective. Then we will move on to its gradient which will be used in the training phase to minimize it :
 
@@ -209,9 +209,6 @@ For the neural network, the modification of the parameters ꞃ and λ and the ba
 When comparing the two algorithms, we could see that the accuracy of the decision tree is still below the neural network's one.
 
 ## 4. Conclusion
-The different approaches have good accuracy to predict the excretion of the protein into the periplasm or if the protein will stay inside the cell. The best algorithms between those which were tested is the neural network one with almost every time an accuracy of 99%. 
-We could also conclude that the signal peptide is of great significance to predict the excretion of the protein but there is clearly an other type of signal to forestall the excretion of proteins.
-
 ## References
 
 1.  Alley, Ethan C., et al. "Unified rational protein engineering with sequence-only deep representation learning." bioRxiv (2019): 589333. 
