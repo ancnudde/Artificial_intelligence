@@ -1,4 +1,4 @@
-# Predicting cellular location using with UniRep embedding
+# Predicting cellular location using UniRep embedding of protein sequence
 
 Buisson-Chavot Guillaume 
 Cnudde Anthony
