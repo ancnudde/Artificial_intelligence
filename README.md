@@ -169,7 +169,7 @@ To achieve this goal, we will minimize the following cost function:
 
 The cost function is essentially a measure of how bad our model is doing at achieving the objective. Then we will move on to its gradient which will be used in the training phase to minimize it :
 
-![The gradient of the cost function](img/Capture d’écran_2020-05-29_18-18-17.png)
+![Capture d’écran_2020-05-29_18-18-17](img/Capture d’écran_2020-05-29_18-18-17.png)
 
 If you look closely at J(w), to find it’s minimum, we have to:
 - minimize ∣∣w∣∣² which maximizes margin (2/∣∣w∣∣)
