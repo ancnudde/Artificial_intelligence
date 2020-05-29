@@ -4,6 +4,11 @@ date: 29-06-2020
 author: Buisson-Chavot Guillaume, Cnudde Anthony, Ody Jessica, Van den Schilden Jan
 classoption:
 - twocolumn
+geometry:
+- top=10mm
+- left=10mm
+- right=10mm
+- bottom=15mm
 header-includes:
 - \usepackage{caption}
 - \captionsetup[figure]{labelformat=empty}
