@@ -73,3 +73,55 @@ decision tree,
 support vector machine (SVM),
 and recurrent neural network.
 The performance of the different methods was compared.
+
+## 2. Methods
+
+### 2.1. Data mining
+
+The protein dataset for this work was generated using the [Uniprot REST API](https://www.uniprot.org/help/api%5Fqueries). 
+The API provides a programmatic access to download the sequences through queries.
+The goal in this work was to make a classifier that can distinguish between cytoplasmic and periplasmic proteins.
+Only Gram-negative Bacteria have a periplasm,
+but this is not one phylogenetic group.
+In this work we limited ourselves to Gammaproteobacteria.
+
+To generate a set of cytoplasmic proteins,
+the query asked for proteins with an annotation of being located in the cytoplasm or cytosol.
+As an extra safeguard,
+it was specified that those proteins could not have an annotation of containing a signal peptide as cytoplasmic proteins normally do not have signal peptides.
+The query is shown below.
+
+```
+QUERY="taxonomy:Gammaproteobacteria 
+(locations:(location:cytoplasm) 
+OR locations:(location:cytosol)) 
+NOT annotation:(type:signal)"
+```
+
+
+To generate the set of periplasmic proteins,
+a similar search was performed.
+This time looking for an annotation of the protein being in the periplasm and the presence of a signal peptide (shown below).
+
+```
+QUERY="taxonomy:Gammaproteobacteria 
+locations:(location:periplasm) 
+annotation:(type:signal)"
+```
+
+As we explain before, signal peptides are used to identify destination of proteins[CITATION Ben12 \l 2060  \m Kla12 \m Pen19], 
+but it has been noted that certain biophysical features are necessary in addition to guarantee its translocation.
+Therefore, a third dataset was generated which was identical to the periplasm dataset, 
+except that the signal peptides were cut off to compare the performance of the different ML methods when trained with and without signal peptide.
+
+To limit sampling bias, 
+the software CD-HIT a calculates the percentage identity between the protein sequences. 
+Sequences with more identity than 50 percent are clustered together and a representative was chosen.
+
+Finally, the sequences were transformed into a fixed length vector representation using UniRep. 
+This method extracts states from an unsupervised trained mLSTM-RNN and combines them into a fixed length UniRep representation. 
+This representation contains essential structural and functional features that can be used by ML algorithms to distinguish between Periplasmic and Cytoplasmic proteins.
+
+For the decision tree and the neural network, and linear regression, 
+3000 sequences of cytoplasmic protein and 3000 sequences of periplasmic protein are selected from the datasets previously shuffled to randomize the samples 
+This gives a working dataset of 6000 sequences.
