@@ -191,7 +191,7 @@ The training algorithm has to find the optimal values w and b which define this 
 
 Our objective is to find a hyperplane that separates +ve and -ve proteins with the largest margin while keeping the misclassification as low as possible. To achieve this goal, we will minimize the following cost function:
 
-$J(w) = \frac{1}{2}||w||^2 + C\left[\frac{1}{N}\sum\limits_{i}^{n}max(0, 1-y_i * (w \cdotp x_i + b))\right]$
+$$J(w) = \frac{1}{2}||w||^2 + C\left[\frac{1}{N}\sum\limits_{i}^{n}max(0, 1-y_i * (w \cdotp x_i + b))\right]$$
 
 In the training phase, larger C results in the narrow margin and smaller C results in the wider margin
 
