@@ -176,12 +176,14 @@ SVM is a supervised machine learning algorithm used in general for binary classi
 
 #### Algorithm 
 The SVM algorithm is trained by feeding a dataset with labeled examples (xi, yi). For instance, if our set is composed of proteins and our problem is to determine from which cellular compartment they are, then:
+
 - An example protein xᵢ is defined as an n-dimentional feature vector that can be plotted on n-dimensional space.
 - The feature vector, as its name indicates, contains features of your protein in numerical form
 - Each feature vector is labeled with a class yi depending on the compartment.
 - The class yᵢ can either be a +ve or -ve (for instance, periplasm protein = 1, cytoplasm protein = -1)
 
 Using this dataset, the algorithm have to find a hyperplane (or decision boundary) whose properties are as follows:
+
 - It creates a separation between proteins of  the two classes with a maximum margin
 - the hyperplane equation (w.x + b = 0) yields a value ≥ 1 for proteins from +ve class and ≤ -1 for proteins from -ve class
 The training algorithm has to find the optimal values w and b which define this hyperplane. These optimal values are found by minimizing a cost function. Once the training algorithm has identified these optimal values, the SVM model f(x) is then defined as : f(x) = sign (w*. x + b*)
@@ -198,6 +200,7 @@ The cost function is essentially a measure of how bad our model is doing at achi
 
 
 If you look closely at J(w), to find it’s minimum, we have to:
+
 - minimize ∣∣w∣∣² which maximizes margin (2/∣∣w∣∣)
 - minimize the following sum of Hinge loss function which minimizes misclassifications
 
