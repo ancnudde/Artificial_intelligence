@@ -129,6 +129,30 @@ For the decision tree and the neural network, and linear regression,
 This gives a working dataset of 6000 sequences.
 
 ### 2.2 Linear regression
+
+#### Principle and algorithm
+
+In a multiple linear regression model the value to predict (dependent variable, column vector Y)
+depends on one or multiple independent variables (matrix X) in a linear way.
+Each independent variable has its own weight (column vector B).
+
+Y = XB
+
+Optimizing the model is choosing the weights in the Column vector B so that observations Y' deviate as little as possible from the predicted values Y.
+To give a quantification to "as little as possible",
+the mean square error cost function was used.
+
+MSE = SUM((Y-Y')^2)/N
+
+While this gives an indication of how good a certain set of weights is,
+it doesn't tell in which directions these weights should be modified to get better weights.
+To get this direction,
+the partial derivative is of the cost function is taken in each of the direction.
+To not "jump" to far, this new direction is multiplied by a fraction.
+This method is also called gradient descent.
+
+B_n+1 = B_n - gamma * Delta(MSE(B_n))
+
 ### 2.3 Decision tree
 
 #### Principle
@@ -169,6 +193,7 @@ To achieve this goal, we will minimize the following cost function:
 
 ![pic1](img/pic1.png)
 
+$$ j(w) = \frac{1}{2}$$
 
 In the training phase, larger C results in the narrow margin and smaller C results in the wider margin
 
