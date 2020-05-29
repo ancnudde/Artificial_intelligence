@@ -1,11 +1,13 @@
-# Predicting cellular location using UniRep embedding of protein sequence
+---
+title: Predicting cellular location using UniRep embedding of protein sequence
+date: 29-06-2020
+author: Buisson-Chavot Guillaume, Cnudde Anthony, Ody Jessica, Van den Schilden Jan
+classoption:
+- twocolumn
+---
 
-Buisson-Chavot Guillaume, 
-Cnudde Anthony,
-Ody Jessica,
-Van den Schilden Jan
 
-29-06-2020
+
 
 ## 1. Introduction
 
