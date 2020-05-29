@@ -75,56 +75,17 @@ and recurrent neural network.
 The performance of the different methods was compared.
 
 ## 2. Methods
+### 2.1 Data mining and visualisation
+The dataset of protein for this work is elaborated form the Uniprot platform. The protein sequences are retrieved with UniProt REST API (https://www.uniprot.org/help/api%5Fqueries), a programmatic access that allows to download the sequences through queries. To limit the size of the dataset, we only included proteins of Gammaproteobacteria. 
+First, we asked in the location query to select only the proteins with an annotation of being in the cytoplasm or the cytosol. As an extra safeguard, it was specified that those proteins could not have an annotation of containing a signal peptide which would indicate its destination to be another than the cytoplasm or cytosol. 
+Second, periplasmic protein sequences were selected through a similar method with for the location query the annotation of the protein being in the periplasm. It is also specified in the annotation query that proteins should contain signal peptides.
+As we explain before, signal peptides are used to identify destination of proteins (Benham 2012, Klatt et Zoltan 2012, Peng Chong 2019) but are sometimes insufficient to guarantee the identification of all the proteins that have a certain destination, in this case the periplasm. So, a third file is generated with the location query selecting protein in the periplasm and no signal peptides in the protein sequence.
+To limit the sampling bias, the software CD-HIT align the protein sequences in the selected dataset and calculate the percentage of identity of the sequences and only sequences of at most 50 percent identity were kept.
+Finally, the sequences were transformed to a fixed length vector representation using UniRep. This method extracts states from an unsupervised trained mLSTM-RNN and combines them into a fixed length UniRep representation. This representation contains essential structural and functional features that can be used by ML algorithms to distinguish between Periplasmic and Cytoplasmic proteins.
+For the decision tree and the neural network, 3000 sequences of cytoplasmic protein and 3000 sequences of periplasmic protein are selected from the datasets previously shuffle to randomise the samples, given a working dataset of 6000 sequences.
+For the linear regression analysis, 4000 sequences of each cellular compartments were randomly selected which make a dataset of 8000 sequences. 
 
-### 2.1. Data mining
-
-The protein dataset for this work was generated using the [Uniprot REST API](https://www.uniprot.org/help/api%5Fqueries). 
-The API provides a programmatic access to download the sequences through queries.
-The goal in this work was to make a classifier that can distinguish between cytoplasmic and periplasmic proteins.
-Only Gram-negative Bacteria have a periplasm,
-but this is not one phylogenetic group.
-In this work we limited ourselves to Gammaproteobacteria.
-
-To generate a set of cytoplasmic proteins,
-the query asked for proteins with an annotation of being located in the cytoplasm or cytosol.
-As an extra safeguard,
-it was specified that those proteins could not have an annotation of containing a signal peptide as cytoplasmic proteins normally do not have signal peptides.
-The query is shown below.
-
-```
-QUERY="taxonomy:Gammaproteobacteria 
-(locations:(location:cytoplasm) 
-OR locations:(location:cytosol)) 
-NOT annotation:(type:signal)"
-```
-
-
-To generate the set of periplasmic proteins,
-a similar search was performed.
-This time looking for an annotation of the protein being in the periplasm and the presence of a signal peptide (shown below).
-
-```
-QUERY="taxonomy:Gammaproteobacteria 
-locations:(location:periplasm) 
-annotation:(type:signal)"
-```
-
-As we explain before, signal peptides are used to identify destination of proteins[CITATION Ben12 \l 2060  \m Kla12 \m Pen19], 
-but it has been noted that certain biophysical features are necessary in addition to guarantee its translocation.
-Therefore, a third dataset was generated which was identical to the periplasm dataset, 
-except that the signal peptides were cut off to compare the performance of the different ML methods when trained with and without signal peptide.
-
-To limit sampling bias, 
-the software CD-HIT a calculates the percentage identity between the protein sequences. 
-Sequences with more identity than 50 percent are clustered together and a representative was chosen.
-
-Finally, the sequences were transformed into a fixed length vector representation using UniRep. 
-This method extracts states from an unsupervised trained mLSTM-RNN and combines them into a fixed length UniRep representation. 
-This representation contains essential structural and functional features that can be used by ML algorithms to distinguish between Periplasmic and Cytoplasmic proteins.
-
-For the decision tree and the neural network, and linear regression, 
-3000 sequences of cytoplasmic protein and 3000 sequences of periplasmic protein are selected from the datasets previously shuffled to randomize the samples 
-This gives a working dataset of 6000 sequences.
+To begin the data analysis, we first did a probability plot to visualise the normality of the data. To normalize the data, we tiedat first a log transformation, a cube root and then a simple scaling. The normalisation showed improvement with the simple scaling, butwe could not get perfectly normal distribution. Afterwards, a PCA was done to visualise how close are the two classes.
 
 ### 2.2 Linear regression
 ### 2.3 Decision tree
