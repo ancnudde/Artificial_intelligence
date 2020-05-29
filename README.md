@@ -195,6 +195,12 @@ The cost function used is the cross-entropy function. This cost-function makes t
 
 We can see on the PCA plot (Figure 1) that the distribution of the sequences is different with or without the signal peptide. With the signal peptide the delimitation is clearer between the cytoplasmic and periplasmic protein. The third principal component allows a good separation between the two set of sequences. Without the signal peptide, we still could see the two clouds of points but there is a bigger overlap between both.
 ![PCA](img/PCA.PNG)
+
+The accuracy of the linear regression on the dataset with peptide signal is 98.12% and the accuracy for the dataset without the signal peptide is lesser, 94.56%.  
+After training and testing the decision tree, we can see that the accuracy, the proportion of correctly predicted sequence, is 97.66%.  
+For the neural network, the modification of the parameters ꞃ and λ and the batch size does not seem to highly impact the k-fold cross validation as it is always around 99%. The results after training are slightly better with the batch size to 8 and the ꞃ value around 0.2.  
+When comparing the two algorithms, we could see that the accuracy of the decision tree is still below the neural network's one.
+
 ## 4. Conclusion
 ## References
 
