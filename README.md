@@ -5,10 +5,10 @@ author: Buisson-Chavot Guillaume, Cnudde Anthony, Ody Jessica, Van den Schilden 
 classoption:
 - twocolumn
 geometry:
-- top=10mm
-- left=10mm
-- right=10mm
-- bottom=15mm
+- top=25mm
+- left=20mm
+- right=20mm
+- bottom=30mm
 header-includes:
 - \usepackage{caption}
 - \captionsetup[figure]{labelformat=empty}
