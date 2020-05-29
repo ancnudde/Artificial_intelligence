@@ -189,7 +189,7 @@ The cost function used is the cross-entropy function. This cost-function makes t
 $C = -\frac{1}{n}\sum_{x}[yln_a + (1 - y)ln(1 - a)]$
 
 ## 3. Results and Discussion
-
+![image](PCA.PNG)
 ## 4. Conclusion
 ## References
 
