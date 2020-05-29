@@ -73,3 +73,13 @@ decision tree,
 support vector machine (SVM),
 and recurrent neural network.
 The performance of the different methods was compared.
+
+## 2. Methods
+### 2.1 Data mining and visualisation
+### 2.2 Linear regression
+### 2.3 Decision tree
+### 2.4 Support Vector Machine (SVM)
+### 2.5 Recurrent neural network
+## 3. Results and Discussion
+## 4. Conclusion
+## References
