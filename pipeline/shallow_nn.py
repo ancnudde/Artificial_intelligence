@@ -1,6 +1,4 @@
 import numpy as np
-from mnist_prepare import parse_data
-from med_5 import import_5_med
 
 
 def sigmoid_activation(neuron_layer):
